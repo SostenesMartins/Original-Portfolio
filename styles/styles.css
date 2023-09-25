@@ -12,10 +12,16 @@
 }
 
 :root {
-    --bg-color: rgb(31, 36, 45);
-    --secondary-bg-color: #323946;
+    --bg-color: rgb(23, 27, 34);
+    --secondary-bg-color: #272c36;
     --text-color: #FFF;
     --main-color: #29970e;
+}
+
+.dark-mode {
+    --bg-color: #e9e9e9;
+    --secondary-bg-color: #f3f3f3;
+    --text-color: #000;
 }
 
 html {
@@ -55,6 +61,19 @@ section {
     color: var(--text-color);
     font-weight: 700;
     cursor: default;
+    opacity: 0;
+    animation: slideRight 1s ease forwards;
+}
+
+@keyframes slideRight {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 .navbar a {
@@ -64,12 +83,42 @@ section {
     text-transform: uppercase;
     transition: .3s;
     font-weight: 500;
+    opacity: 0;
+    animation: slideTop 1s ease forwards;
+    animation-delay: calc(.4s * var(--i));
+}
+
+@keyframes slideTop {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .navbar a:hover,
 .navbar a.active {
     filter: drop-shadow(0 0 .2rem var(--main-color));
     color: var(--main-color);
+}
+
+.toggle {
+    display: flex;
+    cursor: pointer;
+    margin-top: 1px;
+    position: absolute;
+    right: 40px;
+    opacity: 0;
+    animation: 2s slideLeft ease forwards ;
+    animation-delay: 1s;
+}
+
+.toggle .toggle-icon {
+    font-size: 26px;
+    color: var(--text-color);
 }
 
 #menu-icon {
@@ -218,6 +267,20 @@ span {
     color: var(--main-color);
     margin: 3rem 1.5rem 3rem 0;
     transition: .5s ease;
+    opacity: 0;
+    animation: slideLeft 1s ease forwards;
+    animation-delay: calc(.2s * var(--i));
+}
+
+@keyframes slideLeft {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 .midia-social a:hover {
@@ -238,6 +301,20 @@ span {
     text-transform: uppercase;
     font-weight: 700;
     transition: .5s ease;
+    opacity: 0;
+    animation: slideBottom 1s ease forwards;
+    animation-delay: 2s;
+}
+
+@keyframes slideBottom {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .btn:hover {
@@ -425,6 +502,44 @@ span {
 
 /* ----------------------- arrow up ------------------------ */
 
+.arrow-up {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--secondary-bg-color);
+    width: 40px;
+    box-shadow: 0 0 1rem var(--bg-color);
+    height: 45px;
+    border-radius: .4rem;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    opacity: 0;
+    /* Inicialmente, a seta está oculta */
+    transition: opacity 0.3s ease;
+    /* Transição suave para a propriedade 'opacity' */
+}
+
+.arrow-up span {
+    font-size: 1.5rem;
+    color: var(--text-color);
+}
+
+/* Aplicar a animação de entrada quando a classe 'show' é adicionada */
+.arrow-up.show {
+    opacity: 1;
+    animation-name: fadeIn;
+    animation-duration: 0.8s;
+    animation-fill-mode: forwards;
+}
+
+/* Aplicar a animação de saída quando a classe 'hide' é adicionada */
+.arrow-up.hide {
+    animation-name: fadeOut;
+    animation-duration: 0.8s;
+    animation-fill-mode: forwards;
+}
+
 /* Animação de entrada */
 @keyframes fadeIn {
     from {
@@ -455,48 +570,23 @@ span {
     }
 }
 
-.arrow-up {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: var(--secondary-bg-color);
-    width: 40px;
-    box-shadow: 0 0 1rem var(--bg-color);
-    height: 45px;
-    border-radius: .4rem;
-    text-align: center;
-    line-height: 40px;
-    cursor: pointer;
-    opacity: 0;
-    /* Inicialmente, a seta está oculta */
-    transition: opacity 0.3s ease;
-    /* Transição suave para a propriedade 'opacity' */
-}
-
-.arrow-up span {
-    font-size: 1.5rem;
-    color: #FFF;
-}
-
-/* Aplicar a animação de entrada quando a classe 'show' é adicionada */
-.arrow-up.show {
-    opacity: 1;
-    animation-name: fadeIn;
-    animation-duration: 0.8s;
-    animation-fill-mode: forwards;
-}
-
-/* Aplicar a animação de saída quando a classe 'hide' é adicionada */
-.arrow-up.hide {
-    animation-name: fadeOut;
-    animation-duration: 0.8s;
-    animation-fill-mode: forwards;
-}
-
 /* ---------------------- footer ------------------------- */
 
 .footer {
+    padding: 100px 0 50px;
     text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.wp-contato p {
+    font-size: 1.7rem;
+    line-height: 4rem;
+}
+
+.wp-contato img {
+    border-radius: 1rem;
 }
 
 .footer .footer-texto {
@@ -521,6 +611,10 @@ span {
         padding: 2rem 3%;
     }
 
+    .toggle {
+        right: 60vw;
+    }
+
     section {
         padding: 10rem 3% 2rem;
     }
@@ -535,6 +629,10 @@ span {
     .inicio {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .toggle {
+        right: 10vw;
     }
 
     .imagem-inicio img {
@@ -594,6 +692,10 @@ span {
 @media (max-width: 450px) {
     html {
         font-size: 50%;
+    }
+
+    .toggle {
+        right: 15vw;
     }
 
     .inicio img {

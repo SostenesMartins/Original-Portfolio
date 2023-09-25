@@ -25,15 +25,22 @@ const typed = new Typed('.multiple-text', {
 
 const burger = document.querySelector('.icon');
 const menu = document.querySelector('.menu');
-const body = document.body
 
 if (burger && menu) {
     burger.addEventListener('click', () => {
         burger.classList.toggle('_active');
         menu.classList.toggle('_active');
-        body.classList.toggle('_lock');
     })
 }
+
+/* ------------------- dark mode / light mode ---------------------- */
+
+const toggleIcon = document.querySelector('.toggle-icon');
+
+toggleIcon.addEventListener('click', () => {
+    toggleIcon.classList.toggle('bx-sun');
+    document.body.classList.toggle('dark-mode')
+});
 
 /* -------------------  arrow up ------------------------- */
 
